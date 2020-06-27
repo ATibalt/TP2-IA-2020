@@ -1,5 +1,6 @@
 package agente;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +11,11 @@ import ambiente.PercepcionChatbot;
 
 public class EstadoAgente extends AgentState {
 	
+	private Set<ArrayList<String>> listaDatos = new HashSet<ArrayList<String>>();
 	private Set<String> listaClaves = new HashSet<String>();
+	private String nombreUsuario = null;
+	private String tipoUsuario = null;
+	private Integer edadUsuario = 0;
 	
 	public EstadoAgente() {
 
@@ -23,8 +28,24 @@ public class EstadoAgente extends AgentState {
 		PercepcionChatbot cbp = (PercepcionChatbot) p;
         BaseDeConocimiento bdc = new BaseDeConocimiento();
 
+        listaDatos.clear();
         listaClaves.clear();
-        listaClaves = bdc.getPalabrasClave(cbp.getMensaje());
+        listaDatos = bdc.getPalabrasClave(cbp.getMensaje());
+        
+        actualizarDatosUsuario(listaDatos);
+	}
+
+	private void actualizarDatosUsuario(Set<ArrayList<String>> listaClaves) {
+		// TODO Auto-generated method stub
+		for(ArrayList<String> s : listaClaves) {
+			if(s.get(0).equals("NOMBRE")) {
+				setNombreUsuario(s.get(1));
+			}
+			else if (s.get(0).equals("EDAD")) {
+				setEdadUsuario(Integer.parseInt(s.get(1)));
+			}
+			this.listaClaves.add(s.get(0));
+		}
 	}
 
 	@Override
@@ -39,6 +60,14 @@ public class EstadoAgente extends AgentState {
 
 	}
 
+	public Set<ArrayList<String>> getListaDatos() {
+		return listaDatos;
+	}
+
+	public void setListaDatos(Set<ArrayList<String>> listaDatos) {
+		this.listaDatos = listaDatos;
+	}
+	
 	public Set<String> getListaClaves() {
 		return listaClaves;
 	}
@@ -47,6 +76,41 @@ public class EstadoAgente extends AgentState {
 
 	public void setListaClaves(Set<String> listaClaves) {
 		this.listaClaves = listaClaves;
+	}
+
+
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+
+
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
+
+
+
+	public String getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+
+
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
+
+
+	public Integer getEdadUsuario() {
+		return edadUsuario;
+	}
+
+
+
+	public void setEdadUsuario(Integer edadUsuario) {
+		this.edadUsuario = edadUsuario;
 	}
 
 }

@@ -50,6 +50,9 @@ public class AgenteChatbot extends Agent {
     
     public void see(Perception p) {
         this.getAgentState().updateState(p);
+        listaReglas.clear();
+        cargarReglas();
+        mdi.setListaReglas(listaReglas);
     }
     
     public Action learn() throws Exception{
@@ -78,7 +81,7 @@ public class AgenteChatbot extends Agent {
     public void cargarReglas(){
 //		Estructura de una regla:
 //		Condiciones - Then - ID - specificity - priority - novelty
-        listaReglas = new BaseDeConocimiento().crearReglas();
+        listaReglas = new BaseDeConocimiento().crearReglas(agState);
     }
     
 	@Override

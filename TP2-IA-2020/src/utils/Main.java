@@ -5,7 +5,6 @@ import javax.swing.*;
 import agente.AgenteChatbot;
 import ambiente.AmbienteChatbot;
 import importadasFaia.KnowledgeBasedAgentSimulator;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;

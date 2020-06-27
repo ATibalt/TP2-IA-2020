@@ -1,5 +1,6 @@
 package SistemaDeProduccion;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -9,9 +10,9 @@ public class MemoriaDeTrabajo {
     private static final String sinTildes = "AaEeIiOoUuNnUu";
     private static final String puntuacion = ",.;:¿?¡!()'´$%&";
 
-    public static Set<String> convertir(String oracion){
+    public static Set<ArrayList<String>> convertir(String oracion){
     	
-        Set<String> listaClaves = new HashSet<String>();
+        Set<ArrayList<String>> listaClaves = new HashSet<ArrayList<String>>();
         String siguiente;
         System.out.println(oracion);
         oracion = normalizar(oracion);
@@ -23,23 +24,35 @@ public class MemoriaDeTrabajo {
             siguiente = tokens.nextToken();
 
             if(siguiente.equals("HOLA") || siguiente.equals("HOLAS") || siguiente.equals("OLA")|| siguiente.equals("BUENAS")){
-                listaClaves.add("SALUDO");
+            	ArrayList<String> saludo = new ArrayList<String>();
+            	saludo.add("SALUDO");
+                listaClaves.add(saludo);
             }
 
             else if(siguiente.equals("MI")|| siguiente.equals("YO")|| siguiente.equals("SOY")|| siguiente.equals("ESTOY") || siguiente.equals("TENGO")){
-                listaClaves.add("USUARIO");
+            	ArrayList<String> usuario = new ArrayList<String>();
+            	usuario.add("USUARIO");
+                listaClaves.add(usuario);
             }
             
             else if(siguiente.equals("AUGUSTO")|| siguiente.equals("MAURO")|| siguiente.equals("FRANCISCO")|| siguiente.equals("JORGE")|| siguiente.equals("MILAGROS")|| siguiente.equals("JUAN")){
-                listaClaves.add("NOMBRE");
+            	ArrayList<String> nombre = new ArrayList<String>();
+            	nombre.add("NOMBRE");
+            	nombre.add(siguiente);
+                listaClaves.add(nombre);
             }
             
             else if(siguiente.equals("COVID")|| siguiente.equals("CORONONA")|| siguiente.equals("VIRUS")|| siguiente.equals("CORONAVIRUS")|| siguiente.equals("COVID19")|| siguiente.equals("COVID-19")){
-                listaClaves.add("ENFERMEDAD");
+            	ArrayList<String> enfermedad = new ArrayList<String>();
+            	enfermedad.add("ENFERMEDAD");
+                listaClaves.add(enfermedad);
             }
             
             else if(siguiente.matches("^\\d{2}$")){
-                listaClaves.add("EDAD");
+            	ArrayList<String> edad = new ArrayList<String>();
+            	edad.add("EDAD");
+            	edad.add(siguiente);
+                listaClaves.add(edad);
             }
 //            else if(siguiente.equals("NAME")||siguiente.equals("LASTNAME")||siguiente.equals("NICKNAME")){
 //                listaClaves.add("NAME");

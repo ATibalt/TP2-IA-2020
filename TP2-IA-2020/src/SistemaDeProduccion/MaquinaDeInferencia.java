@@ -120,6 +120,10 @@ public class MaquinaDeInferencia extends Solve{
         }
         return listaReglasAplicables;
     }
+    
+    public void setListaReglas (List<Regla> reglas) {
+    	this.listaDeReglas = reglas;
+    }
 
     protected void ejecutar(Regla r){
         reglasUsadas.add(r);

@@ -2,8 +2,11 @@ package SistemaDeProduccion;
 
 import utils.Regla;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import agente.EstadoAgente;
 
 public class BaseDeConocimiento {
 
@@ -16,12 +19,12 @@ public class BaseDeConocimiento {
         memoriaDeProduccion = new MemoriaDeProduccion();
     }
 
-    public Set<String> getPalabrasClave(String mensaje){
+    public Set<ArrayList<String>> getPalabrasClave(String mensaje){
         return memoriaDeTrabajo.convertir(mensaje);
     }
 
-    public List<Regla> crearReglas(){
-        return memoriaDeProduccion.crearReglas();
+    public List<Regla> crearReglas(EstadoAgente agState){
+        return memoriaDeProduccion.crearReglas(agState);
     }
 
     public MemoriaDeTrabajo getMemoriaDeTrabajo() {
