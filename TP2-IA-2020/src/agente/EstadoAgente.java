@@ -13,8 +13,8 @@ public class EstadoAgente extends AgentState {
 	
 	private Set<ArrayList<String>> listaDatos = new HashSet<ArrayList<String>>();
 	private Set<String> listaClaves = new HashSet<String>();
-	private String nombreUsuario = null;
-	private String tipoUsuario = null;
+	private String nombreUsuario = "";
+	private String tipoUsuario = "ciudadano";
 	private Integer edadUsuario = 0;
 	
 	public EstadoAgente() {
@@ -43,6 +43,13 @@ public class EstadoAgente extends AgentState {
 			}
 			else if (s.get(0).equals("EDAD")) {
 				setEdadUsuario(Integer.parseInt(s.get(1)));
+				if(Integer.parseInt(s.get(1)) > 65) setTipoUsuario("riesgo");
+			}
+			else if (s.get(0).equals("TRABAJO")) {
+				setTipoUsuario(s.get(1));
+			}
+			else if (s.get(0).equals("PATOLOGIA")) {
+				setTipoUsuario("riesgo");
 			}
 			this.listaClaves.add(s.get(0));
 		}

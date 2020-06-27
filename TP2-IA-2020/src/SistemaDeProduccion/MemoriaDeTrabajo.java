@@ -28,25 +28,119 @@ public class MemoriaDeTrabajo {
             	saludo.add("SALUDO");
                 listaClaves.add(saludo);
             }
-
-            else if(siguiente.equals("MI")|| siguiente.equals("YO")|| siguiente.equals("SOY")|| siguiente.equals("ESTOY") || siguiente.equals("TENGO")){
+            else if(siguiente.equals("MI")|| siguiente.equals("YO")|| siguiente.equals("SOY")|| siguiente.equals("ESTOY") || siguiente.equals("TENGO") || siguiente.matches("SUFRO") || siguiente.matches("PADEZCO") || siguiente.matches("NECESITO")){
             	ArrayList<String> usuario = new ArrayList<String>();
             	usuario.add("USUARIO");
                 listaClaves.add(usuario);
             }
-            
             else if(siguiente.equals("AUGUSTO")|| siguiente.equals("MAURO")|| siguiente.equals("FRANCISCO")|| siguiente.equals("JORGE")|| siguiente.equals("MILAGROS")|| siguiente.equals("JUAN")){
             	ArrayList<String> nombre = new ArrayList<String>();
             	nombre.add("NOMBRE");
             	nombre.add(siguiente);
                 listaClaves.add(nombre);
-            }
-            
+            }            
             else if(siguiente.equals("COVID")|| siguiente.equals("CORONONA")|| siguiente.equals("VIRUS")|| siguiente.equals("CORONAVIRUS")|| siguiente.equals("COVID19")|| siguiente.equals("COVID-19")){
             	ArrayList<String> enfermedad = new ArrayList<String>();
             	enfermedad.add("ENFERMEDAD");
                 listaClaves.add(enfermedad);
             }
+            
+            ///////////////////////////////////////////////////////////
+            //Nuevas
+            else if(siguiente.equals("SUGERENCIA")|| siguiente.equals("CONSEJO")|| siguiente.equals("RECOMENDACION")|| siguiente.equals("RECOMENDACIONES")|| siguiente.equals("CONSEJOS")|| siguiente.equals("SUGERENCIAS") || siguiente.equals("MEDIDAS") || siguiente.equals("REGLAS")){
+            	ArrayList<String> consejo = new ArrayList<String>();
+            	consejo.add("CONSEJO");
+                listaClaves.add(consejo);
+            }
+            else if(siguiente.equals("EVITAR") || siguiente.equals("EVITO")){
+            	ArrayList<String> evitar = new ArrayList<String>();
+            	evitar.add("EVITAR");
+                listaClaves.add(evitar);
+            }
+            else if(siguiente.equals("QUE") || siguiente.equals("PORQUE") || siguiente.equals("COMO") || siguiente.equals("CUANDO") || siguiente.equals("POR") || siguiente.equals("DONDE") || siguiente.equals("CUANTO") || siguiente.equals("CUANTOS") || siguiente.equals("CUAL") || siguiente.equals("CUALES")){
+            	ArrayList<String> pregunta = new ArrayList<String>();
+            	pregunta.add("PREGUNTA");
+                listaClaves.add(pregunta);
+            }
+            else if(siguiente.equals("CONTAGIO") || siguiente.equals("CONTAGIOS") || siguiente.equals("CONTAGIARME") || siguiente.equals("ENFERMARME") || siguiente.equals("INFECTARME") || siguiente.equals("MORIRME") || siguiente.equals("CONTAGIA") || siguiente.equals("INFECCION") || siguiente.equals("CONTAGIAR")){
+            	ArrayList<String> contagio = new ArrayList<String>();
+            	contagio.add("CONTAGIO");
+                listaClaves.add(contagio);
+            }
+            else if(siguiente.equals("TASA") || siguiente.equals("CANTIDAD") || siguiente.equals("NIVEL")){
+            	ArrayList<String> tasa = new ArrayList<String>();
+            	tasa.add("TASA");
+                listaClaves.add(tasa);
+            }
+            else if(siguiente.equals("ARGENTINA") || siguiente.equals("PAIS") || siguiente.equals("SANTA FE") || siguiente.equals("BRASIL")){
+            	ArrayList<String> lugar = new ArrayList<String>();
+            	lugar.add("LUGAR");
+                listaClaves.add(lugar);
+            }
+            else if(siguiente.equals("MUERTE") || siguiente.equals("MUERTES") || siguiente.equals("MORTALIDAD") || siguiente.equals("MUERTOS")){
+            	ArrayList<String> muerte = new ArrayList<String>();
+            	muerte.add("MORTALIDAD");
+                listaClaves.add(muerte);
+            }
+            else if(siguiente.equals("SINTOMAS") || siguiente.equals("SINTOMA") || siguiente.equals("SEÑAL") || siguiente.equals("SEÑALES") || siguiente.equals("CAUSAS")){
+            	ArrayList<String> sintoma = new ArrayList<String>();
+            	sintoma.add("SINTOMA");
+                listaClaves.add(sintoma);
+            }
+            
+            else if(siguiente.matches("PERMISOS")||siguiente.matches("HABILITACION")||siguiente.matches("PERMISO")||siguiente.matches("PAPELES")){
+            	ArrayList<String> permisos = new ArrayList<String>();
+            	permisos.add("PERMISOS");
+                listaClaves.add(permisos);
+            }
+            else if(siguiente.matches("TRABAJO")||siguiente.matches("TRABAJAR")||siguiente.matches("LABURAR")||siguiente.matches("CIRCULAR")){
+            	ArrayList<String> actividad = new ArrayList<String>();
+            	actividad.add("ACTIVIDAD");
+                listaClaves.add(actividad);
+            }
+            else if(siguiente.matches("TELEFONO")||siguiente.matches("CELULAR")||siguiente.matches("CONTACTO")){
+            	ArrayList<String> contacto = new ArrayList<String>();
+            	contacto.add("CONTACTO");
+                listaClaves.add(contacto);
+            }
+            
+            else if(siguiente.matches("VACUNA")||siguiente.matches("REMEDIOS")||siguiente.matches("REMEDIO")){
+            	ArrayList<String> vacuna = new ArrayList<String>();
+            	vacuna.add("VACUNA");
+                listaClaves.add(vacuna);
+            }
+            
+            else if(siguiente.matches("SANTAFE")){
+            	ArrayList<String> santafe = new ArrayList<String>();
+            	santafe.add("SANTAFE");
+                listaClaves.add(santafe);
+            }
+            else if(siguiente.matches("BUENOSAIRES")){
+            	ArrayList<String> buenosaires = new ArrayList<String>();
+            	buenosaires.add("BUENOSAIRES");
+                listaClaves.add(buenosaires);
+            }
+            else if(siguiente.matches("CORDOBA")){
+            	ArrayList<String> cordoba = new ArrayList<String>();
+            	cordoba.add("CORDOBA");
+                listaClaves.add(cordoba);
+            }
+            else if(siguiente.matches("ARGENTINA")){
+            	ArrayList<String> argentina = new ArrayList<String>();
+            	argentina.add("ARGENTINA");
+                listaClaves.add(argentina);
+            }
+            else if(siguiente.matches("BRASIL")){
+            	ArrayList<String> brasil = new ArrayList<String>();
+            	brasil.add("BRASIL");
+                listaClaves.add(brasil);
+            }
+            else if(siguiente.matches("FRANCIA")){
+            	ArrayList<String> francia = new ArrayList<String>();
+            	francia.add("FRANCIA");
+                listaClaves.add(francia);
+            }
+            ///////////////////////////////////////////////////////////
             
             else if(siguiente.matches("^\\d{2}$")){
             	ArrayList<String> edad = new ArrayList<String>();
@@ -54,47 +148,32 @@ public class MemoriaDeTrabajo {
             	edad.add(siguiente);
                 listaClaves.add(edad);
             }
-//            else if(siguiente.equals("NAME")||siguiente.equals("LASTNAME")||siguiente.equals("NICKNAME")){
-//                listaClaves.add("NAME");
-//            }
-//            else if(siguiente.equals("OLD")){
-//                listaClaves.add("OLD");
-//            }
-//            else if(siguiente.equals("BORN")||siguiente.equals("FROM")){
-//                listaClaves.add("BORN");
-//            }
-//            else if(siguiente.equals("TEACHER")|| siguiente.equals("TEACHERS")){
-//                listaClaves.add("TEACHER");
-//            }
-//            else if(siguiente.equals("BANK")||siguiente.equals("MONEY")||siguiente.equals("CASH")||siguiente.equals("CREDITCARD")||siguiente.equals("CARD")||siguiente.equals("DEBITCARD")||siguiente.equals("BILL")||siguiente.equals("DOLLAR")||siguiente.equals("GOLD")||siguiente.equals("EXPENSIVE")){
-//                listaClaves.add("MONEY");
-//            }
-//            else if(siguiente.equals("JEWELLERY")||siguiente.equals("NECKLACE")||siguiente.equals("RING")){
-//                listaClaves.add("JEWELLERY");
-//            }
-//            else if(siguiente.equals("HOBBY")||siguiente.equals("ACTIVITY")||siguiente.equals("DOING")){
-//                listaClaves.add("ACTIVITY");
-//            }
-//            else if(siguiente.equals("WEAR")||siguiente.equals("CLOTHES")||siguiente.equals("WEARING")){
-//                listaClaves.add("WEAR");
-//            }
-//            else if(siguiente.equals("TAKE")){
-//                listaClaves.add("TAKE");
-//            }
-//            else if(siguiente.equals("PICTURE")||siguiente.equals("PHOTO")||siguiente.equals("SELFIE")){
-//                listaClaves.add("PHOTO");
-//            }
-//            else if(siguiente.equals("SEX")||siguiente.equals("PORN")||siguiente.equals("TRIPLEX")||siguiente.equals("XXX")){
-//                listaClaves.add("XXX");
-//            }
-//            else if(siguiente.equals("GO")||siguiente.equals("WENT")||siguiente.equals("GONE")||siguiente.equals("GOING")) {
-//                listaClaves.add("GO");
-//            }
-//            else if(siguiente.equals("OUT")||siguiente.equals("OFF")) {
-//                listaClaves.add("OUT");
-//            }
+            else if(siguiente.matches("ENFERMERO") || siguiente.matches("MEDICO") || siguiente.matches("KINESIOLOGO") || siguiente.matches("AMBULANCIERO")){
+            	ArrayList<String> trabajo = new ArrayList<String>();
+            	trabajo.add("TRABAJO");
+            	trabajo.add("salud");
+                listaClaves.add(trabajo);
+            }
+            else if(siguiente.matches("EMPLEADO") || siguiente.matches("COMERCIANTE") || siguiente.matches("VENDEDOR")){
+            	ArrayList<String> trabajo = new ArrayList<String>();
+            	trabajo.add("TRABAJO");
+            	trabajo.add("comercio");
+                listaClaves.add(trabajo);
+            }
+            else if(siguiente.matches("DIABETES") || siguiente.matches("HIPERTENSION") || siguiente.matches("OBESIDAD") || siguiente.matches("DIABETICO") || siguiente.matches("HIPERTENSO") || siguiente.matches("OBESO")){
+            	ArrayList<String> patologia = new ArrayList<String>();
+            	patologia.add("PATOLOGIA");
+                listaClaves.add(patologia);
+            }
 
         }
+        
+        if(listaClaves.isEmpty()) {
+        	ArrayList<String> porDefecto = new ArrayList<String>();
+        	porDefecto.add("PORDEFECTO");
+            listaClaves.add(porDefecto);
+        }
+        
         System.out.println(listaClaves);
         return listaClaves;
     }
