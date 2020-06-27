@@ -54,6 +54,23 @@ public class MemoriaDeTrabajo {
             	edad.add(siguiente);
                 listaClaves.add(edad);
             }
+            else if(siguiente.matches("ENFERMERO") || siguiente.matches("MEDICO") || siguiente.matches("KINESIOLOGO") || siguiente.matches("AMBULANCIERO")){
+            	ArrayList<String> trabajo = new ArrayList<String>();
+            	trabajo.add("TRABAJO");
+            	trabajo.add("salud");
+                listaClaves.add(trabajo);
+            }
+            else if(siguiente.matches("EMPLEADO") || siguiente.matches("COMERCIANTE") || siguiente.matches("VENDEDOR")){
+            	ArrayList<String> trabajo = new ArrayList<String>();
+            	trabajo.add("TRABAJO");
+            	trabajo.add("comercio");
+                listaClaves.add(trabajo);
+            }
+            else if(siguiente.matches("DIABETES") || siguiente.matches("HIPERTENSION") || siguiente.matches("OBESIDAD")){
+            	ArrayList<String> patologia = new ArrayList<String>();
+            	patologia.add("PATOLOGIA");
+                listaClaves.add(patologia);
+            }
 //            else if(siguiente.equals("NAME")||siguiente.equals("LASTNAME")||siguiente.equals("NICKNAME")){
 //                listaClaves.add("NAME");
 //            }

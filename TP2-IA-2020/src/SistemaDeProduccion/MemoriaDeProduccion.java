@@ -26,13 +26,15 @@ public class MemoriaDeProduccion {
     		 listaReglas.add(new Regla(Arrays.asList("USUARIO", "EDAD"), "Muy bien "+agState.getNombreUsuario()+", por tu edad no entras dentro del grupo de pacientes de riesgo, pero de cualquier manera necesitas cuidarte."
     				 													 + "\n" + "¿A que te dedicas?", 3, 3, 5, 1));
     	}	
-    	else if(agState.getEdadUsuario() > 50 && agState.getEdadUsuario() < 65) {
+    	else if(agState.getEdadUsuario() > 50 && agState.getEdadUsuario() < 60) {
     		listaReglas.add(new Regla(Arrays.asList("USUARIO", "EDAD"), "Muy bien "+agState.getNombreUsuario()+", estas cercano a las edades de riesgo, deberias cuidarte lo máximo posible."
     																	 + "\n" + "¿A que te dedicas?", 3, 3, 5, 1));
     	}
-    	else if(agState.getEdadUsuario() > 65) {
+    	else if(agState.getEdadUsuario() > 60) {
     		listaReglas.add(new Regla(Arrays.asList("USUARIO", "EDAD"), "Muy bien "+agState.getNombreUsuario()+", por tu edad entras dentro del grupo de pacientes de riesgo, asi que necesitas cuidarte mucho." + "\n" + "No salgas de no ser necesario!", 3, 3, 5, 1));
     	}
+    	
+    	
     	
         return listaReglas;
     }
