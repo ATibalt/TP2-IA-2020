@@ -13,7 +13,7 @@ public class EstadoAgente extends AgentState {
 	
 	private Set<ArrayList<String>> listaDatos = new HashSet<ArrayList<String>>();
 	private Set<String> listaClaves = new HashSet<String>();
-	private String nombreUsuario = null;
+	private String nombreUsuario = "";
 	private String tipoUsuario = "ciudadano";
 	private Integer edadUsuario = 0;
 	
