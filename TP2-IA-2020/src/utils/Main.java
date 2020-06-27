@@ -1,40 +1,56 @@
 package utils;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 
 import agente.AgenteChatbot;
 import ambiente.AmbienteChatbot;
 import importadasFaia.KnowledgeBasedAgentSimulator;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.border.EmptyBorder;
+import javax.swing.GroupLayout.Alignment;
+import net.miginfocom.swing.MigLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.border.LineBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class Main extends JFrame{
 
     AgenteChatbot agent;
     AmbienteChatbot environment;
     KnowledgeBasedAgentSimulator simulator;
-
+    
+    FileWriter fichero;
+    
     private static final long serialVersionUID = 1L;
 
     private JTextArea mensaje = new JTextArea();
-
-    private JLabel labelRta = new JLabel("MONITOR:");
-    private JTextArea respuesta = new JTextArea();
+    private JEditorPane respuesta = new JEditorPane();
     private JScrollPane sp = new JScrollPane(respuesta);
 
-    private JLabel labelLog = new JLabel("LOG:");
-    private JTextArea logFases = new JTextArea();
-    private JScrollPane logSP = new JScrollPane(logFases);
-
-    private JLabel NCP = new JLabel("North Central Positronics");
-
-    JButton enviar = new JButton("ENVIAR");
+    JButton enviar = new JButton("");
 
     int aux = 0;
+    private final JPanel panel_2 = new JPanel();
+    private final JLabel lblNewLabel_1 = new JLabel("ASISTENTE ANTI COVID 19");
+    private final JLabel lblNewLabel_2 = new JLabel("Online");
 
-    public Main() {
+    public Main() throws IOException {
+    	
+    	//Se abre el fichero donde se guardará el log
+    	String filePath = new File("").getAbsolutePath();
+		fichero = new FileWriter(filePath + "/src/reporte/log.txt");
+    	
         setResizable(false);
 
         // INICIALIZACION
@@ -43,120 +59,151 @@ public class Main extends JFrame{
         simulator = new KnowledgeBasedAgentSimulator(environment, agent);
 
         getContentPane().setLayout(null);
+        respuesta.setToolTipText("");
+        respuesta.setContentType("");
+//        respuesta.setLineWrap(true); aca
+//        respuesta.setWrapStyleWord(true); aca
+        respuesta.setForeground(Color.BLACK);
+        respuesta.setBorder(BorderFactory.createCompoundBorder(
+        		respuesta.getBorder(), 
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Panel de respuesta
-        labelRta.setFont(new Font("Century Gothic", Font.BOLD, 16));
-        getContentPane().add(labelRta);
-        labelRta.setLocation(25,5);
-        labelRta.setSize(200,15);
-
-        respuesta.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        respuesta.setRows(1);
+        respuesta.setFont(new Font("Tahoma", Font.PLAIN, 14));
+//        respuesta.setRows(1); aca
         respuesta.setEditable(false);
         respuesta.setBounds(25, 25, 350, 250);
-        respuesta.setColumns(10);
+//        respuesta.setColumns(10); aca
         respuesta.setBackground(Color.WHITE);
+        sp.setViewportBorder(null);
 
-        sp.setBounds(25, 25, 529, 334);
+        sp.setBounds(10, 113, 405, 318);
         getContentPane().add(sp);
         sp.setViewportView(respuesta);
-
-        // Panel de informacion sobre las fases
-        labelLog.setFont(new Font("Century Gothic", Font.BOLD, 16));
-        getContentPane().add(labelLog);
-        labelLog.setLocation(560,5);
-        labelLog.setSize(200,15);
-
-        logFases.setFont(new Font("Courier New", Font.PLAIN, 11));
-        logFases.setRows(1);
-        logFases.setEditable(false);
-        logFases.setBounds(560,25,350,250);
-        logFases.setColumns(10);
-        logFases.setBackground(new Color(192, 192, 192));
-
-        logSP.setBounds(560,25,400,334);
-        getContentPane().add(logSP);
-        logSP.setViewportView(logFases);
-
-        // Panel de cargado de mensaje
-        mensaje.setText(" ingrese aqui la percepcion del agente");
-        mensaje.setFont(new Font("Segoe UI Historic", Font.ITALIC, 11));
-        mensaje.setBounds(25, 370, 529, 91);
-        getContentPane().add(mensaje);
-        mensaje.setColumns(10);
-
-        // Formato del boton de enviar
-        enviar.setBounds(610, 377, 300, 69);
-        enviar.setFont(new Font("Century Gothic", Font.BOLD, 20));
-        enviar.setBackground(new Color(217, 217, 217));
-        getContentPane().add(enviar);
-
-        // EE
-        NCP.setFont(new Font("OCR A", Font.BOLD, 9));
-        getContentPane().add(NCP);
-        NCP.setLocation(865,0);
-        NCP.setSize(125,15);
-
-        enviar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                if(!mensaje.getText().equals(" ingrese aqui la percepcion del agente")){
-                    buscarRespuesta();
-                }
-            }
-        });
-
-        mensaje.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if(!(e.getKeyCode() == KeyEvent.VK_ENTER)){
-                    mensaje.setText(mensaje.getText());
-                }else{
-                    mensaje.setText("");
-                }
-            }
-            public void keyPressed(KeyEvent e){
-                if(mensaje.getText() != ""){
-                    // para borrar el placeholder text
-                    if(aux == 0){
-                        aux++;
-                        mensaje.setText("");
-                        mensaje.setFont(new Font("Arial", Font.PLAIN, 12));
-                    }
-                    if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                        if(!mensaje.getText().equals(" ingrese aqui la percepcion del agente")){
-                            buscarRespuesta();
+        
+        JPanel panel = new JPanel();
+        panel.setBorder(new LineBorder(Color.GRAY));
+        panel.setBounds(10, 442, 326, 69);
+        getContentPane().add(panel);
+                panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+                mensaje.setLineWrap(true);
+                mensaje.setWrapStyleWord(true);
+                panel.add(mensaje);
+        
+                // Panel de cargado de mensaje (ingrese aqui la percepcion del agente)
+                mensaje.setText(" Escriba aquí su mensaje");
+                mensaje.setFont(new Font("Tahoma", Font.ITALIC, 14));
+                mensaje.setColumns(10);
+                mensaje.setBorder(BorderFactory.createCompoundBorder(
+                		mensaje.getBorder(), 
+                        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                
+                JPanel panel_1 = new JPanel();
+                panel_1.setBorder(new LineBorder(Color.GRAY));
+                panel_1.setBounds(346, 442, 69, 69);
+                getContentPane().add(panel_1);
+                panel_1.setLayout(null);
+                enviar.setBounds(1, 1, 67, 67);
+                enviar.setIcon(new ImageIcon(Main.class.getResource("/img/btn-enviar.png")));
+                enviar.setFont(new Font("Century Gothic", Font.BOLD, 20));
+                enviar.setBackground(new Color(217, 217, 217));
+                panel_1.add(enviar);
+                panel_2.setBorder(new LineBorder(Color.GRAY));
+                panel_2.setBackground(Color.WHITE);
+                panel_2.setBounds(10, 11, 405, 91);
+                
+                getContentPane().add(panel_2);
+                
+                JLabel lblNewLabel = new JLabel("");
+                lblNewLabel.setBounds(17, 11, 69, 69);
+                lblNewLabel.setIcon(new ImageIcon(Main.class.getResource("/img/img-perfil.png")));
+                lblNewLabel_1.setBounds(105, 20, 245, 27);
+                lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+                lblNewLabel_2.setBounds(105, 47, 69, 20);
+                lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+                panel_2.setLayout(null);
+                panel_2.add(lblNewLabel);
+                panel_2.add(lblNewLabel_1);
+                panel_2.add(lblNewLabel_2);
+                
+                
+                
+                
+                enviar.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        if(!mensaje.getText().equals(" Escriba aquí su mensaje")){
+                            try {
+						buscarRespuesta();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                         }
                     }
-                }
-            }
-        });
-
-        mensaje.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent feg) {
-                mensaje.setFont(new Font("Arial", Font.PLAIN, 12));
-                mensaje.setText("");
-            }
-            public void focusLost(FocusEvent fel) {
-                if (mensaje.getText().equals("")) {
-                    mensaje.setText(" ingrese aqui la percepcion del agente");
-                    mensaje.setFont(new Font("Segoe UI Historic", Font.ITALIC, 11));
-                }
-            }
-        });
+                });
+                
+                        mensaje.addKeyListener(new KeyAdapter() {
+                            @Override
+                            public void keyReleased(KeyEvent e) {
+                                if(!(e.getKeyCode() == KeyEvent.VK_ENTER)){
+                                    mensaje.setText(mensaje.getText());
+                                }else{
+                                    mensaje.setText("");
+                                }
+                            }
+                            public void keyPressed(KeyEvent e){
+                                if(mensaje.getText() != ""){
+                                    // para borrar el placeholder text
+                                    if(aux == 0){
+                                        aux++;
+                                        mensaje.setText("");
+                                        mensaje.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                                    }
+                                    if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                                        if(!mensaje.getText().equals(" Escriba aquí su mensaje")){
+                                            try {
+                								buscarRespuesta();
+                							} catch (IOException e1) {
+                								// TODO Auto-generated catch block
+                								e1.printStackTrace();
+                							}
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        
+                                mensaje.addFocusListener(new FocusAdapter() {
+                                    @Override
+                                    public void focusGained(FocusEvent feg) {
+                                        mensaje.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                                        mensaje.setText("");
+                                    }
+                                    public void focusLost(FocusEvent fel) {
+                                        if (mensaje.getText().equals("")) {
+                                            mensaje.setText(" Escriba aquí su mensaje");
+                                            mensaje.setFont(new Font("Tahoma", Font.ITALIC, 14));
+                                        }
+                                    }
+                                });
 
         addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing(WindowEvent e){
+            	try {
+					fichero.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 System.out.println("Fin");
                 System.exit(EXIT_ON_CLOSE);
             }
         });
-        this.setBounds(300,100,990,500);
+        this.setBounds(300,100,433,551);
 
     }
 
-    public void buscarRespuesta(){
+    public void buscarRespuesta() throws IOException {
         if(!mensaje.getText().isEmpty()){
             Calendar calendario = Calendar.getInstance();
             int hora =calendario.get(Calendar.HOUR_OF_DAY);
@@ -178,7 +225,7 @@ public class Main extends JFrame{
                 log = resultados.get(1);
             }
 
-            respuesta.setText(respuesta.getText()+time+"    <Percepcion>\n      " + oracionAux);
+            respuesta.setText(respuesta.getText()+ "[ " + time+" - Usuario ]\n" + oracionAux);
             respuesta.setText(respuesta.getText()+"\n \n");
 
             // el if esta para que cuando no existan problemas, no diga "<Accion>"
@@ -186,16 +233,19 @@ public class Main extends JFrame{
                 respuesta.setText(respuesta.getText()+time+" :\n      " + rta);
             }
             else{
-                respuesta.setText(respuesta.getText()+time+"    <Accion>\n      " + rta);
+                respuesta.setText(respuesta.getText()+ "[ " +time+" - <b>Asistente</b> ]\n" + rta);
             }
 
-            logFases.setText(log + "\n");
+            //Guardar el log en el fichero
+            fichero.write(log);
+
             respuesta.setText(respuesta.getText() + "\n");
 
             // Separador entre cada interaccion, que es tan largo como el ultimo renglo de la respuesta
-            for(int k=0; k <= rta.length(); k++){
-                respuesta.setText(respuesta.getText() + "--");
-            }
+//            for(int k=0; k <= rta.length(); k++){
+//            for(int k=0; k <= 37; k++){
+//                respuesta.setText(respuesta.getText() + "--");
+//            }
             respuesta.setText(respuesta.getText() + "\n");
 
             aux = 0;
@@ -203,10 +253,10 @@ public class Main extends JFrame{
         }
     }
 
-    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, IOException {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
+                try {                	
                     Main frame = new Main();
                     frame.setVisible(true);
                 } catch (Exception e) {
