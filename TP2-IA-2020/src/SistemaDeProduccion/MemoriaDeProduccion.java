@@ -60,6 +60,7 @@ public class MemoriaDeProduccion {
     	//ETAPA DE SETUP DE LA CONVERSACION
     	listaReglas.add(new Regla(Arrays.asList("SALUDO"), "Hola, soy tu asistente COVID-19, si me indicas tus datos puedo darte consejos personalizados." +
     			                                           "\n" + "Cual es tu nombre?", 1, 3, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("SALUDO"), "Hola, soy tu asistente COVID-19, si necesitas datos de paises/pronvincias puedo responderte." + "\n", 30, 3, 5, 1));
     	
     	listaReglas.add(new Regla(Arrays.asList("USUARIO", "NOMBRE"), "OK "+agState.getNombreUsuario()+", que edad tenes?", 2, 3, 5, 1));
     	
@@ -67,7 +68,7 @@ public class MemoriaDeProduccion {
     		 listaReglas.add(new Regla(Arrays.asList("USUARIO", "EDAD"), "Muy bien "+agState.getNombreUsuario()+", por tu edad no entras dentro del grupo de pacientes de riesgo, pero de cualquier manera necesitas cuidarte."
     				 													 + "\n" + "¿A que te dedicas?", 3, 3, 5, 1));
     		 listaReglas.add(new Regla(Arrays.asList("USUARIO", "EDAD"), "Ok"+agState.getNombreUsuario()+", deberias tener cuidado con esta enfermedad."
-						 												 + "\n" + "¿Tenes alguna patologia previa?", 6, 3, 7, 1));
+						 												 + "\n" + "¿Tenes alguna patologia previa?", 6, 3, 5, 1));
     	}	
     	else if(agState.getEdadUsuario() > 50 && agState.getEdadUsuario() < 60) {
     		listaReglas.add(new Regla(Arrays.asList("USUARIO", "EDAD"), "Muy bien "+agState.getNombreUsuario()+", estas cercano a las edades de riesgo, deberias cuidarte lo máximo posible."
@@ -129,10 +130,6 @@ public class MemoriaDeProduccion {
     																		   + " 	De momento, la OMS estima que la tasa de contagio (R0) del virus es de 1,4 a 2,5." + "\n"
     																		   + "	Esto significa que cada infectado puede a su vez contagiar a 1 o 2 personas más.", 8, 5, 5, 1));
     	
-    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "MORTALIDAD"), "- Lamentablemente el COVID-19 ya ha dejado 500,164 muertos en todo el mundo", 9, 5, 5, 1));
-    	
-    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "MORTALIDAD", "LUGAR"), "- Lamentablemente el COVID-19 ya ha dejado 1,192 muertos en Argentina", 10, 6, 5, 1));
-    	
     	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "TASA", "MORTALIDAD"), "- La tasa de mortalidad del COVID-19 a nivel mundial es del 8% sobre el total de infectados", 11, 6, 5, 1));
     	
     	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "TASA", "MORTALIDAD", "LUGAR"), "- Hasta ahora la tasa de mortalidad del COVID-19 en Argentina es 6% sobre la cantidad de infectados", 12, 6, 5, 1));
@@ -152,38 +149,58 @@ public class MemoriaDeProduccion {
 														    			"	Los síntomas graves son los siguientes:\r\n" + 
 														    			"		. Dificultad para respirar o sensación de falta de aire\r\n" + 
 														    			"		. Dolor o presión en el pecho\r\n" + 
-														    			"		. Incapacidad para hablar o moverse", 12, 6, 5, 1)); 
+														    			"		. Incapacidad para hablar o moverse", 13, 6, 5, 1)); 
     	
-    	//TODO: Reglas sobre el tiempo de la enfermedad, regla de numeros de atencion para casos sospechosos
+    	//TODO: Reglas sobre el tiempo de la enfermedad
     	
+    	//DATOS POR LUGAR
+    	ArrayList datosLugar = seleccionarDatosLugar(agState);
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "MORTALIDAD", "LUGAR"), "- Hasta ahora la cantidad de muertos por COVID-19 en "+ datosLugar.get(0) +" es " + datosLugar.get(2), 14, 6, 7, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "CONTAGIO", "LUGAR"), "- Hasta ahora la cantidad de contagiados de COVID-19 en "+ datosLugar.get(0) +" es " + datosLugar.get(1), 15, 6, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "RECUPERADO", "LUGAR"), "- Hasta ahora la cantidad de personas recuperadas de COVID-19 en "+ datosLugar.get(0) +" es " + datosLugar.get(3), 16, 6, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "CUARENTENA", "LUGAR"), "- En "+ datosLugar.get(0) + datosLugar.get(6) + " existe una cuarentena vigente.", 16, 6, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "RIESGO", "LUGAR"), "- En "+ datosLugar.get(0) + datosLugar.get(6) + " existe riesgo de contagio, si tiene que ir por favor tenga mucho cuidado.", 17, 6, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "RIESGO", "CONTAGIO", "LUGAR"), "- "+ datosLugar.get(0) +" "+ datosLugar.get(6) + " se considera una zona con riesgo de contagio.", 18, 7, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "CIRCULACION", "LUGAR"), "- En "+ datosLugar.get(0) +" "+ datosLugar.get(6) + " existe circulacion interna del virus. Consulte en la pagina del Ministerio de Salud para ver cuales son las zonas mas riesgosas", 19, 6, 5, 1));
+    	//Preguntas generales
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "MORTALIDAD"), "- Lamentablemente el COVID-19 ya ha dejado "+datosLugar.get(2)+" muertos en todo el mundo", 20, 6, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "CONTAGIO"), "- Hasta ahora la cantidad de contagiados de COVID-19 en el "+ datosLugar.get(0) +" es " + datosLugar.get(1), 21, 6, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "RECUPERADO"), "- Hasta ahora la cantidad de personas recuperadas de COVID-19 en el "+ datosLugar.get(0) +" es " + datosLugar.get(3), 22, 6, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "CUARENTENA"), "- Las cuarentenas suelen ser locales, asi que deberias preguntar si hay una en tu provincia/ciudad/pais", 23, 6, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "RIESGO"), "- El mundo sigue siendo un lugar de riesgo, al menos hasta que exista una vacuna.", 24, 6, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "RIESGO", "CONTAGIO"), "- El mundo sigue siendo un lugar de riesgo, al menos hasta que exista una vacuna.", 25, 7, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "CIRCULACION"), "- Muchos paises en el mundo aun tienen circulacion interna del virus, si preguntas por uno especificamente quizas podria responderte.", 26, 6, 5, 1));
+    	//Datos
+    	listaReglas.add(new Regla(Arrays.asList("DATO", "LUGAR"), "- Los datos relacionados con el COVID-19 en " + datosLugar.get(0) +" son los siguientes:" + "\n"
+    															  + "	-Cantidad de muertes: " + datosLugar.get(1) + "\n"
+    															  + "	-Cantidad de contagiados: " + datosLugar.get(2) + "\n"
+    															  + "	-Cantidad de personas recuperadas: " + datosLugar.get(3) + "\n"
+    															  + "	-Hay circulacion interna: " + datosLugar.get(4) + "\n"
+    															  + "	-Es zona de riesgo: " +datosLugar.get(5) + "\n"
+    															  + "	-Hay cuarentena obligatoria: "+datosLugar.get(6) + "\n", 27, 6, 5, 1));
     	
-    	// PARA TODOS LOS ROLES
-    	listaReglas.add(new Regla(Arrays.asList("SANTAFE"), "\n"+"Los numeros de la ciudad de Santa Fe es de:"+"\n"
-				+"Contagios: 480 personas."+ "\n"
-				+"Recuperados: 123 personas."+ "\n"
-				+"Fallecidos: 17 personas."+ "\n", 3, 3, 5, 1));
-    	listaReglas.add(new Regla(Arrays.asList("BUENOSAIRES"), "\n"+"Los numeros de la ciudad de Buenos Aires es de:"+"\n"
-				+"Contagios: 780 personas."+ "\n"
-				+"Recuperados: 330 personas."+ "\n"
-				+"Fallecidos: 38 personas."+ "\n", 3, 3, 5, 1));
-    	listaReglas.add(new Regla(Arrays.asList("CORDOBA"), "\n"+"Los numeros de la ciudad de Cordoba es de:"+"\n"
-				+"Contagios: 148 personas."+ "\n"
-				+"Recuperados: 87 personas."+ "\n"
-				+"Fallecidos: 1 personas."+ "\n", 3, 3, 5, 1));
-    	listaReglas.add(new Regla(Arrays.asList("ARGENTINA"), "\n"+"Los numeros de la ciudad de Argentina es de:"+"\n"
-				+"Contagios: 1480 personas."+ "\n"
-				+"Recuperados: 823 personas."+ "\n"
-				+"Fallecidos: 98 personas."+ "\n", 3, 3, 5, 1));
-    	listaReglas.add(new Regla(Arrays.asList("BRASIL"), "\n"+"Los numeros de la ciudad de Brasil es de:"+"\n"
-				+"Contagios: 30587 personas."+ "\n"
-				+"Recuperados: 3804 personas."+ "\n"
-				+"Fallecidos: 10264 personas."+ "\n", 3, 3, 5, 1));
-    	listaReglas.add(new Regla(Arrays.asList("FRANCIA"), "\n"+"Los numeros de la ciudad de Francia es de:"+"\n"
-				+"Contagios: 25784 personas."+ "\n"
-				+"Recuperados: 1872 personas."+ "\n"
-				+"Fallecidos: 15467 personas."+ "\n", 3, 3, 5, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA","CONTACTO"), "\n"+"Los numeros de telefono son:"+"\n"
+																			+"	-Ministerio de Salud llamar al 120 las 24hs del dia."+ "\n"
+																			+"	-Por Whatsapp: +54 9 11 2256-0566"+ "\n", 28, 3, 5, 1));
     	
         return listaReglas;
     }
+
+	private ArrayList<String> seleccionarDatosLugar(EstadoAgente agState) {
+		
+		for(ArrayList<String> a : agState.getDatosCovid()) {	
+			
+			String lugarUsuario = agState.getLugarDeInteres().replaceAll(" ", "");
+			String lugarLista = a.get(0).replaceAll("ï»¿", "");
+			lugarLista = a.get(0).replaceAll(" ", "");
+			
+			if(lugarUsuario.matches(lugarLista)) {
+				return a;
+			}
+			
+		}
+		
+		return agState.getDatosCovid().get(0);	
+	}
 
 }
