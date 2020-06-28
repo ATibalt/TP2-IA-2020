@@ -1,8 +1,10 @@
 package agente;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -138,7 +140,8 @@ public class EstadoAgente extends AgentState {
 
 	private void cargarDatosCovid() {
 		// TODO Auto-generated method stub
-		String csvFile = "/Users/PC/Desktop/DatosCovid.csv";
+		String filePath = new File("").getAbsolutePath();
+		String csvFile = filePath + "/src/reporte/DatosCovid.csv";
         String line = "";
         String cvsSplitBy = ",";
 
