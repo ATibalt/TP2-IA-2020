@@ -35,8 +35,9 @@ public class Main extends JFrame{
     private static final long serialVersionUID = 1L;
 
     private JTextArea mensaje = new JTextArea();
-    private JEditorPane respuesta = new JEditorPane();
+    private JTextPane  respuesta = new JTextPane();
     private JScrollPane sp = new JScrollPane(respuesta);
+    private String auxRespuesta = new String();
 
     JButton enviar = new JButton("");
 
@@ -59,8 +60,8 @@ public class Main extends JFrame{
         simulator = new KnowledgeBasedAgentSimulator(environment, agent);
 
         getContentPane().setLayout(null);
+        respuesta.setContentType("text/html");
         respuesta.setToolTipText("");
-        respuesta.setContentType("");
 //        respuesta.setLineWrap(true); aca
 //        respuesta.setWrapStyleWord(true); aca
         respuesta.setForeground(Color.BLACK);
@@ -74,6 +75,10 @@ public class Main extends JFrame{
         respuesta.setBounds(25, 25, 350, 250);
 //        respuesta.setColumns(10); aca
         respuesta.setBackground(Color.WHITE);
+        
+        Font font = respuesta.getFont();
+        auxRespuesta = auxRespuesta + "<html><body style=\"font-family: " + font.getFamily() + "; font-size: "+ font.getSize() + "\">";
+        
         sp.setViewportBorder(null);
 
         sp.setBounds(10, 113, 405, 318);
@@ -98,12 +103,12 @@ public class Main extends JFrame{
                         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
                 
                 JPanel panel_1 = new JPanel();
-                panel_1.setBorder(new LineBorder(Color.GRAY));
+                panel_1.setBorder(null);
                 panel_1.setBounds(346, 442, 69, 69);
                 getContentPane().add(panel_1);
                 panel_1.setLayout(null);
                 enviar.setBounds(1, 1, 67, 67);
-                enviar.setIcon(new ImageIcon(Main.class.getResource("/img/btn-enviar.png")));
+                enviar.setIcon(new ImageIcon(Main.class.getResource("/img/enviar.png")));
                 enviar.setFont(new Font("Century Gothic", Font.BOLD, 20));
                 enviar.setBackground(new Color(217, 217, 217));
                 panel_1.add(enviar);
@@ -224,30 +229,39 @@ public class Main extends JFrame{
             if(resultados.size()>1) {
                 log = resultados.get(1);
             }
-
-            respuesta.setText(respuesta.getText()+ "[ " + time+" - Usuario ]\n" + oracionAux);
-            respuesta.setText(respuesta.getText()+"\n \n");
-
+            
+            auxRespuesta = auxRespuesta + "<p><b>" + time + " - Usuario</b><br>" + oracionAux + "</p>";
+            
+//            auxRespuesta = auxRespuesta + "<br>";
+            
+//            respuesta.setText(respuesta.getText() + "<p>[ " + time+" - Usuario ]" + oracionAux + "</p><p>asd</p>");
+//            respuesta.setText(respuesta.getText()+"<br><br>");
+            
+            auxRespuesta = auxRespuesta + "<p><b style=\"color:blue\">" + time + " - Asistente</b><br>" + rta + "</p>";
+            
+//            auxRespuesta = auxRespuesta + "<br>";
+            
             // el if esta para que cuando no existan problemas, no diga "<Accion>"
-            if(rta.equals("** no privacy violations detected **")){
-                respuesta.setText(respuesta.getText()+time+" :\n      " + rta);
-            }
-            else{
-                respuesta.setText(respuesta.getText()+ "[ " +time+" - <b>Asistente</b> ]\n" + rta);
-            }
+//            if(rta.equals("** no privacy violations detected **")){
+//                respuesta.setText(respuesta.getText()+ "<p>[ " +time+" - <b>Asistente</b> ]<br>" + rta + "</p>");
+//            }
+//            else{
+//                respuesta.setText(respuesta.getText()+ "<p>[ " +time+" - <b>Asistente</b> ]<br>" + rta + "</p>");
+//            }
 
             //Guardar el log en el fichero
             fichero.write(log);
 
-            respuesta.setText(respuesta.getText() + "\n");
+//            respuesta.setText(respuesta.getText() + "<br>");
 
             // Separador entre cada interaccion, que es tan largo como el ultimo renglo de la respuesta
 //            for(int k=0; k <= rta.length(); k++){
 //            for(int k=0; k <= 37; k++){
 //                respuesta.setText(respuesta.getText() + "--");
 //            }
-            respuesta.setText(respuesta.getText() + "\n");
-
+//            respuesta.setText(respuesta.getText() + "<br>");
+            
+            respuesta.setText(auxRespuesta);
             aux = 0;
             enviar.setFocusPainted(true);
         }
