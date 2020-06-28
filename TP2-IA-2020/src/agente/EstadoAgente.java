@@ -1,6 +1,11 @@
 package agente;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,12 +21,15 @@ public class EstadoAgente extends AgentState {
 	private String nombreUsuario = "";
 	private String tipoUsuario = "ciudadano";
 	private Integer edadUsuario = 0;
+	private ArrayList<ArrayList<String>> datosCovid = null;
+	private String lugarDeInteres = ""; 
 	
 	public EstadoAgente() {
+		
+		this.datosCovid = new ArrayList<ArrayList<String>>();
+		cargarDatosCovid();
 
     }
-	
-	
 
 	@Override
 	public void updateState(Perception p) {
@@ -30,6 +38,7 @@ public class EstadoAgente extends AgentState {
 
         listaDatos.clear();
         listaClaves.clear();
+        lugarDeInteres = "";
         listaDatos = bdc.getPalabrasClave(cbp.getMensaje());
         
         actualizarDatosUsuario(listaDatos);
@@ -50,6 +59,9 @@ public class EstadoAgente extends AgentState {
 			}
 			else if (s.get(0).equals("PATOLOGIA")) {
 				setTipoUsuario("riesgo");
+			}
+			else if (s.get(0).equals("LUGAR")) {
+				setLugarDeInteres(s.get(1));
 			}
 			this.listaClaves.add(s.get(0));
 		}
@@ -118,6 +130,46 @@ public class EstadoAgente extends AgentState {
 
 	public void setEdadUsuario(Integer edadUsuario) {
 		this.edadUsuario = edadUsuario;
+	}
+	
+	public ArrayList<ArrayList<String>> getDatosCovid() {
+		return datosCovid;
+	}
+
+	private void cargarDatosCovid() {
+		// TODO Auto-generated method stub
+		String csvFile = "/Users/PC/Desktop/DatosCovid.csv";
+        String line = "";
+        String cvsSplitBy = ",";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] lugar = line.split(cvsSplitBy);
+                
+                ArrayList<String> linea = new ArrayList<String>();
+                
+                for(String s : lugar) {
+                	linea.add(s);
+                }
+                
+                datosCovid.add(linea);
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+
+	public String getLugarDeInteres() {
+		return lugarDeInteres;
+	}
+
+	public void setLugarDeInteres(String lugarDeInteres) {
+		this.lugarDeInteres = lugarDeInteres;
 	}
 
 }

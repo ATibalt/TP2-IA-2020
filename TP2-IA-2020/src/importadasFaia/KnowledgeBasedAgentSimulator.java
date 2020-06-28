@@ -73,15 +73,19 @@ public class KnowledgeBasedAgentSimulator extends frsf.cidisi.faia.simulator.Sim
         }
 
         if (action == null){
-            mensaje.add("** no privacy violations detected **");
+            mensaje.add("Parece que no puedo procesar tu mensaje, recorda que puedo:" + "\n"
+                    + "	- Darte informacion sobre el COVID-19" + "\n"
+                    + "	- Darte consejos sobre como evitar el contagio" + "\n"
+                    + "	- Darte consejos segun tu tipo de trabajo o condicion de salud");
         }
         else{
             act = (ProductionSystemAction) action;
             // Agregamos en primer lugar la respuesta que dara el agente
-            mensaje.add((String) act.getRegla().getThen());
+            mensaje.add((String)act.getRegla().getThen());
             // Agregamos en segundo lugar los detalles de las 3 fases
             mensaje.add(act.getLog());
         }
+        
         System.out.println();
 
         this.ruleReturned(agent, action);

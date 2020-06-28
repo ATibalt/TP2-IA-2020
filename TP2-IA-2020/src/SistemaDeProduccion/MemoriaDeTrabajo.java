@@ -57,12 +57,12 @@ public class MemoriaDeTrabajo {
             	evitar.add("EVITAR");
                 listaClaves.add(evitar);
             }
-            else if(siguiente.equals("QUE") || siguiente.equals("PORQUE") || siguiente.equals("COMO") || siguiente.equals("CUANDO") || siguiente.equals("POR") || siguiente.equals("DONDE") || siguiente.equals("CUANTO") || siguiente.equals("CUANTOS") || siguiente.equals("CUAL") || siguiente.equals("CUALES")){
+            else if(siguiente.equals("HAY") ||siguiente.equals("DEBO") ||siguiente.equals("QUE") || siguiente.equals("CUANTA") || siguiente.equals("CUANTAS") || siguiente.equals("PORQUE") || siguiente.equals("COMO") || siguiente.equals("CUANDO") || siguiente.equals("POR") || siguiente.equals("DONDE") || siguiente.equals("CUANTO") || siguiente.equals("CUANTOS") || siguiente.equals("CUAL") || siguiente.equals("CUALES")){
             	ArrayList<String> pregunta = new ArrayList<String>();
             	pregunta.add("PREGUNTA");
                 listaClaves.add(pregunta);
             }
-            else if(siguiente.equals("CONTAGIO") || siguiente.equals("CONTAGIOS") || siguiente.equals("CONTAGIARME") || siguiente.equals("ENFERMARME") || siguiente.equals("INFECTARME") || siguiente.equals("MORIRME") || siguiente.equals("CONTAGIA") || siguiente.equals("INFECCION") || siguiente.equals("CONTAGIAR")){
+            else if(siguiente.equals("CONTAGIO") || siguiente.equals("CONTAGIOS") || siguiente.equals("CONTAGIADOS") || siguiente.equals("CONTAGIARME") || siguiente.equals("ENFERMARME") || siguiente.equals("INFECTARME") || siguiente.equals("MORIRME") || siguiente.equals("CONTAGIA") || siguiente.equals("INFECCION") || siguiente.equals("CONTAGIAR")){
             	ArrayList<String> contagio = new ArrayList<String>();
             	contagio.add("CONTAGIO");
                 listaClaves.add(contagio);
@@ -72,9 +72,15 @@ public class MemoriaDeTrabajo {
             	tasa.add("TASA");
                 listaClaves.add(tasa);
             }
-            else if(siguiente.equals("ARGENTINA") || siguiente.equals("PAIS") || siguiente.equals("SANTA FE") || siguiente.equals("BRASIL")){
+            else if(siguiente.equals("ARGENTINA") || siguiente.equals("PAIS") || siguiente.equals("BRASIL") || siguiente.equals("CABA")  || siguiente.equals("PBA") || siguiente.equals("CHACO") || 
+            		siguiente.equals("RIONEGRO") || siguiente.equals("CORDOBA") || siguiente.equals("NEUQUEN") || siguiente.equals("SANTAFE") || siguiente.equals("ENTRERIOS") || siguiente.equals("MENDOZA")  || 
+            		siguiente.equals("TIERRADELFUEGO")  || siguiente.equals("CHUBUT") || siguiente.equals("CORRIENTES") || siguiente.equals("JUJUY") || siguiente.equals("LARIOJA") || siguiente.equals("FORMOSA") || 
+            		siguiente.equals("TUCUMAN") || siguiente.equals("SANTACRUZ") || siguiente.equals("MISIONES") || siguiente.equals("SALTA") || siguiente.equals("SANTIAGODELESTERO")  || siguiente.equals("SANLUIS") || 
+            		siguiente.equals("SANJUAN") || siguiente.equals("LAPAMPA") || siguiente.equals("CATAMARCA") || siguiente.equals("USA") || siguiente.equals("BRASIL") || siguiente.equals("RUSIA") || siguiente.equals("INDIA")
+            		|| siguiente.equals("ESPAÑA") || siguiente.equals("ITALIA") || siguiente.equals("CHILE")){
             	ArrayList<String> lugar = new ArrayList<String>();
             	lugar.add("LUGAR");
+            	lugar.add(siguiente);
                 listaClaves.add(lugar);
             }
             else if(siguiente.equals("MUERTE") || siguiente.equals("MUERTES") || siguiente.equals("MORTALIDAD") || siguiente.equals("MUERTOS")){
@@ -109,36 +115,35 @@ public class MemoriaDeTrabajo {
             	vacuna.add("VACUNA");
                 listaClaves.add(vacuna);
             }
-            
-            else if(siguiente.matches("SANTAFE")){
-            	ArrayList<String> santafe = new ArrayList<String>();
-            	santafe.add("SANTAFE");
-                listaClaves.add(santafe);
+            else if(siguiente.matches("RECUPERADO")||siguiente.matches("RECUPERADOS")||siguiente.matches("CURADO")||siguiente.matches("CURADOS")||siguiente.matches("ALTA")){
+            	ArrayList<String> vacuna = new ArrayList<String>();
+            	vacuna.add("RECUPERADO");
+                listaClaves.add(vacuna);
             }
-            else if(siguiente.matches("BUENOSAIRES")){
-            	ArrayList<String> buenosaires = new ArrayList<String>();
-            	buenosaires.add("BUENOSAIRES");
-                listaClaves.add(buenosaires);
+            else if(siguiente.matches("CUARENTENA")||siguiente.matches("AISLAMIENTO")||siguiente.matches("ENCIERRO")||siguiente.matches("ENCERRADO")){
+            	ArrayList<String> vacuna = new ArrayList<String>();
+            	vacuna.add("CUARENTENA");
+                listaClaves.add(vacuna);
             }
-            else if(siguiente.matches("CORDOBA")){
-            	ArrayList<String> cordoba = new ArrayList<String>();
-            	cordoba.add("CORDOBA");
-                listaClaves.add(cordoba);
+            else if(siguiente.matches("RIESGO")||siguiente.matches("PELIGRO")||siguiente.matches("INSEGURO")){
+            	ArrayList<String> vacuna = new ArrayList<String>();
+            	vacuna.add("RIESGO");
+                listaClaves.add(vacuna);
             }
-            else if(siguiente.matches("ARGENTINA")){
-            	ArrayList<String> argentina = new ArrayList<String>();
-            	argentina.add("ARGENTINA");
-                listaClaves.add(argentina);
+            else if(siguiente.matches("CIRCULACION")||siguiente.matches("INTERNO")||siguiente.matches("INTERNA")){
+            	ArrayList<String> vacuna = new ArrayList<String>();
+            	vacuna.add("CIRCULACION");
+                listaClaves.add(vacuna);
             }
-            else if(siguiente.matches("BRASIL")){
-            	ArrayList<String> brasil = new ArrayList<String>();
-            	brasil.add("BRASIL");
-                listaClaves.add(brasil);
+            else if(siguiente.matches("DATOS")||siguiente.matches("DATO")|| siguiente.matches("NUMERO") || siguiente.matches("INDICADORES") || siguiente.matches("INFORME")){
+            	ArrayList<String> dato = new ArrayList<String>();
+            	dato.add("DATO");
+                listaClaves.add(dato);
             }
-            else if(siguiente.matches("FRANCIA")){
-            	ArrayList<String> francia = new ArrayList<String>();
-            	francia.add("FRANCIA");
-                listaClaves.add(francia);
+            else if(siguiente.matches("TELEFONO")||siguiente.matches("CELULAR")||siguiente.matches("CONTACTO") ||siguiente.matches("NUMERO") ||siguiente.matches("ASISTENCIA")||siguiente.matches("CONTACTOS")||siguiente.matches("NUMEROS")||siguiente.matches("CELULARES")){
+            	ArrayList<String> contacto = new ArrayList<String>();
+            	contacto.add("CONTACTO");
+                listaClaves.add(contacto);
             }
             ///////////////////////////////////////////////////////////
             
@@ -193,6 +198,7 @@ public class MemoriaDeTrabajo {
                 temporal[temporal.length-1] = ' ';
             }
         }
+        
         return new String(temporal);
     }
 }
