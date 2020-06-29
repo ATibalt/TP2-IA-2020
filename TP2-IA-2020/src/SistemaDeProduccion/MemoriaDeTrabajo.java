@@ -16,6 +16,7 @@ public class MemoriaDeTrabajo {
         String siguiente;
         System.out.println(oracion);
         oracion = normalizar(oracion);
+        oracion = oracion.replaceAll("a", "");
         System.out.println(oracion);
         StringTokenizer tokens = new StringTokenizer(oracion);
         
@@ -57,12 +58,17 @@ public class MemoriaDeTrabajo {
             	evitar.add("EVITAR");
                 listaClaves.add(evitar);
             }
-            else if(siguiente.equals("HAY") ||siguiente.equals("DEBO") ||siguiente.equals("QUE") || siguiente.equals("CUANTA") || siguiente.equals("CUANTAS") || siguiente.equals("PORQUE") || siguiente.equals("COMO") || siguiente.equals("CUANDO") || siguiente.equals("POR") || siguiente.equals("DONDE") || siguiente.equals("CUANTO") || siguiente.equals("CUANTOS") || siguiente.equals("CUAL") || siguiente.equals("CUALES")){
+            else if(siguiente.equals("HAY") ||siguiente.equals("DEBO") ||siguiente.equals("QUE") || siguiente.equals("PORQUE") || siguiente.equals("COMO") || siguiente.equals("CUANDO") || siguiente.equals("POR") || siguiente.equals("DONDE")|| siguiente.equals("CUAL") || siguiente.equals("CUALES")){
             	ArrayList<String> pregunta = new ArrayList<String>();
             	pregunta.add("PREGUNTA");
                 listaClaves.add(pregunta);
             }
-            else if(siguiente.equals("CONTAGIO") || siguiente.equals("CONTAGIOS") || siguiente.equals("CONTAGIADOS") || siguiente.equals("CONTAGIARME") || siguiente.equals("ENFERMARME") || siguiente.equals("INFECTARME") || siguiente.equals("MORIRME") || siguiente.equals("CONTAGIA") || siguiente.equals("INFECCION") || siguiente.equals("CONTAGIAR")){
+            else if(siguiente.equals("CUANTA") || siguiente.equals("CUANTAS") || siguiente.equals("CUANTO") || siguiente.equals("CUANTOS")){
+            	ArrayList<String> preguntacant = new ArrayList<String>();
+            	preguntacant.add("PREGUNTACANT");
+                listaClaves.add(preguntacant);
+            }
+            else if(siguiente.equals("CONTAGIO") || siguiente.equals("CONTAGIOS") || siguiente.equals("CONTAGIADOS") || siguiente.equals("CONTAGIARME") || siguiente.equals("ENFERMARME") || siguiente.equals("INFECTARME") || siguiente.equals("MORIRME") || siguiente.equals("CONTAGIA") || siguiente.equals("INFECCION") || siguiente.equals("CONTAGIAR") ||  siguiente.equals("INFECTADOS") ){
             	ArrayList<String> contagio = new ArrayList<String>();
             	contagio.add("CONTAGIO");
                 listaClaves.add(contagio);
@@ -77,13 +83,13 @@ public class MemoriaDeTrabajo {
             		siguiente.equals("TIERRADELFUEGO")  || siguiente.equals("CHUBUT") || siguiente.equals("CORRIENTES") || siguiente.equals("JUJUY") || siguiente.equals("LARIOJA") || siguiente.equals("FORMOSA") || 
             		siguiente.equals("TUCUMAN") || siguiente.equals("SANTACRUZ") || siguiente.equals("MISIONES") || siguiente.equals("SALTA") || siguiente.equals("SANTIAGODELESTERO")  || siguiente.equals("SANLUIS") || 
             		siguiente.equals("SANJUAN") || siguiente.equals("LAPAMPA") || siguiente.equals("CATAMARCA") || siguiente.equals("USA") || siguiente.equals("BRASIL") || siguiente.equals("RUSIA") || siguiente.equals("INDIA")
-            		|| siguiente.equals("ESPAÑA") || siguiente.equals("ITALIA") || siguiente.equals("CHILE")){
+            		|| siguiente.equals("ITALIA") || siguiente.equals("CHILE")){
             	ArrayList<String> lugar = new ArrayList<String>();
             	lugar.add("LUGAR");
             	lugar.add(siguiente);
                 listaClaves.add(lugar);
             }
-            else if(siguiente.equals("MUERTE") || siguiente.equals("MUERTES") || siguiente.equals("MORTALIDAD") || siguiente.equals("MUERTOS")){
+            else if(siguiente.equals("MUERTE") || siguiente.equals("MUERTES") || siguiente.equals("MORTALIDAD") || siguiente.equals("MUERTOS")|| siguiente.equals("MUERTO")){
             	ArrayList<String> muerte = new ArrayList<String>();
             	muerte.add("MORTALIDAD");
                 listaClaves.add(muerte);

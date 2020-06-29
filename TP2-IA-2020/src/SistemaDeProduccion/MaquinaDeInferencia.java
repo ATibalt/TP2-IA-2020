@@ -102,7 +102,7 @@ public class MaquinaDeInferencia extends Solve{
         ////////////////////////////////
         r = activeRules.get(0);
         this.ejecutar(r);
-        logDeFases = logDeFases + "\nRegla a ejecutar: " + r.getId() + " -> " + r.getCondition().toString() + " : " + (String) r.getThen() + "\n";
+        logDeFases = logDeFases + "\nRegla a ejecutar: " + r.getId() + " -> " + r.getCondition().toString() + " : " + (String) r.getThen() + "\n //////////////////////////////////////////////////////////// \n //////////////////////////////////////////////////////////// \n";
          
         return new ProductionSystemAction(r,logDeFases);
     }

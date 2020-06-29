@@ -54,16 +54,22 @@ public class EstadoAgente extends AgentState {
 			}
 			else if (s.get(0).equals("EDAD")) {
 				setEdadUsuario(Integer.parseInt(s.get(1)));
-				if(Integer.parseInt(s.get(1)) > 65) setTipoUsuario("riesgo");
+				if(Integer.parseInt(s.get(1)) >= 65) setTipoUsuario("riesgo");
 			}
 			else if (s.get(0).equals("TRABAJO")) {
-				setTipoUsuario(s.get(1));
+				if(this.edadUsuario < 60) { setTipoUsuario(s.get(1));}
+				else { setTipoUsuario("riesgo");}
 			}
 			else if (s.get(0).equals("PATOLOGIA")) {
 				setTipoUsuario("riesgo");
 			}
 			else if (s.get(0).equals("LUGAR")) {
-				setLugarDeInteres(s.get(1));
+				if(s.get(1).matches("PAIS")) {
+					setLugarDeInteres("ARGENTINA");
+				}
+				else {
+					setLugarDeInteres(s.get(1));
+				}	
 			}
 			this.listaClaves.add(s.get(0));
 		}
