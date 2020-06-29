@@ -6,9 +6,9 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 public class MemoriaDeTrabajo {
-    private static final String conTildes = "√?√°√â√©√?√≠√ì√≥√ö√∫√ë√±√ú√º";
+    private static final String conTildes = "¡·…ÈÕÌ”Û⁄˙—Ò‹¸";
     private static final String sinTildes = "AaEeIiOoUuNnUu";
-    private static final String puntuacion = ",.;:¬ø?¬°!()'¬¥$%&";
+    private static final String puntuacion = ",.;:ø?°!()'$%&";
 
     public static Set<ArrayList<String>> convertir(String oracion){
     	
@@ -16,7 +16,9 @@ public class MemoriaDeTrabajo {
         String siguiente;
         System.out.println(oracion);
         oracion = normalizar(oracion);
+        oracion = oracion.replaceAll("a", "");
         System.out.println(oracion);
+        oracion = funcionIneficiente(oracion);
         StringTokenizer tokens = new StringTokenizer(oracion);
         
         while(tokens.hasMoreTokens()){
@@ -57,12 +59,17 @@ public class MemoriaDeTrabajo {
             	evitar.add("EVITAR");
                 listaClaves.add(evitar);
             }
-            else if(siguiente.equals("HAY") ||siguiente.equals("DEBO") ||siguiente.equals("QUE") || siguiente.equals("CUANTA") || siguiente.equals("CUANTAS") || siguiente.equals("PORQUE") || siguiente.equals("COMO") || siguiente.equals("CUANDO") || siguiente.equals("POR") || siguiente.equals("DONDE") || siguiente.equals("CUANTO") || siguiente.equals("CUANTOS") || siguiente.equals("CUAL") || siguiente.equals("CUALES")){
+            else if(siguiente.equals("HAY") ||siguiente.equals("DEBO") ||siguiente.equals("QUE") || siguiente.equals("PORQUE") || siguiente.equals("COMO") || siguiente.equals("CUANDO") || siguiente.equals("POR") || siguiente.equals("DONDE")|| siguiente.equals("CUAL") || siguiente.equals("CUALES")){
             	ArrayList<String> pregunta = new ArrayList<String>();
             	pregunta.add("PREGUNTA");
                 listaClaves.add(pregunta);
             }
-            else if(siguiente.equals("CONTAGIO") || siguiente.equals("CONTAGIOS") || siguiente.equals("CONTAGIADOS") || siguiente.equals("CONTAGIARME") || siguiente.equals("ENFERMARME") || siguiente.equals("INFECTARME") || siguiente.equals("MORIRME") || siguiente.equals("CONTAGIA") || siguiente.equals("INFECCION") || siguiente.equals("CONTAGIAR")){
+            else if(siguiente.equals("CUANTA") || siguiente.equals("CUANTAS") || siguiente.equals("CUANTO") || siguiente.equals("CUANTOS")){
+            	ArrayList<String> preguntacant = new ArrayList<String>();
+            	preguntacant.add("PREGUNTACANT");
+                listaClaves.add(preguntacant);
+            }
+            else if(siguiente.equals("CONTAGIO") || siguiente.equals("CONTAGIOS") || siguiente.equals("CONTAGIADOS") || siguiente.equals("CONTAGIARME") || siguiente.equals("ENFERMARME") || siguiente.equals("INFECTARME") || siguiente.equals("MORIRME") || siguiente.equals("CONTAGIA") || siguiente.equals("INFECCION") || siguiente.equals("CONTAGIAR") ||  siguiente.equals("INFECTADOS") ){
             	ArrayList<String> contagio = new ArrayList<String>();
             	contagio.add("CONTAGIO");
                 listaClaves.add(contagio);
@@ -77,13 +84,13 @@ public class MemoriaDeTrabajo {
             		siguiente.equals("TIERRADELFUEGO")  || siguiente.equals("CHUBUT") || siguiente.equals("CORRIENTES") || siguiente.equals("JUJUY") || siguiente.equals("LARIOJA") || siguiente.equals("FORMOSA") || 
             		siguiente.equals("TUCUMAN") || siguiente.equals("SANTACRUZ") || siguiente.equals("MISIONES") || siguiente.equals("SALTA") || siguiente.equals("SANTIAGODELESTERO")  || siguiente.equals("SANLUIS") || 
             		siguiente.equals("SANJUAN") || siguiente.equals("LAPAMPA") || siguiente.equals("CATAMARCA") || siguiente.equals("USA") || siguiente.equals("BRASIL") || siguiente.equals("RUSIA") || siguiente.equals("INDIA")
-            		|| siguiente.equals("ESPA—A") || siguiente.equals("ITALIA") || siguiente.equals("CHILE")){
+            		|| siguiente.equals("ITALIA") || siguiente.equals("CHILE")){
             	ArrayList<String> lugar = new ArrayList<String>();
             	lugar.add("LUGAR");
             	lugar.add(siguiente);
                 listaClaves.add(lugar);
             }
-            else if(siguiente.equals("MUERTE") || siguiente.equals("MUERTES") || siguiente.equals("MORTALIDAD") || siguiente.equals("MUERTOS")){
+            else if(siguiente.equals("MUERTE") || siguiente.equals("MUERTES") || siguiente.equals("MORTALIDAD") || siguiente.equals("MUERTOS")|| siguiente.equals("MUERTO")){
             	ArrayList<String> muerte = new ArrayList<String>();
             	muerte.add("MORTALIDAD");
                 listaClaves.add(muerte);
@@ -200,5 +207,33 @@ public class MemoriaDeTrabajo {
         }
         
         return new String(temporal);
+    }
+    
+    public static String funcionIneficiente(String oracion) {
+    	
+    	oracion = oracion.toUpperCase();
+    	
+    	if(oracion.contains("RIO NEGRO")) {
+    		oracion = oracion.replaceAll("RIO NEGRO", "RIONEGRO");
+    	} else if (oracion.contains("SANTA FE")) {
+    		oracion = oracion.replaceAll("SANTA FE", "SANTAFE");
+    	} else if (oracion.contains("SAN JUAN")) {
+    		oracion = oracion.replaceAll("SAN JUAN", "SANJUAN");
+    	} else if (oracion.contains("LA PAMPA")) {
+    		oracion = oracion.replaceAll("LA PAMPA", "LAPAMPA");
+    	} else if (oracion.contains("ENTRE RIOS")) {
+    		oracion = oracion.replaceAll("ENTRE RIOS", "ENTRERIOS");
+    	} else if (oracion.contains("TIERRA DEL FUEGO")) {
+    		oracion = oracion.replaceAll("TIERRA DEL FUEGO", "TIERRADELFUEGO");
+    	} else if (oracion.contains("LA RIOJA")) {
+    		oracion = oracion.replaceAll("LA RIOJA", "LARIOJA");
+    	} else if (oracion.contains("SANTA CRUZ")) {
+    		oracion = oracion.replaceAll("SANTA CRUZ", "SANTACRUZ");
+    	} else if (oracion.contains("SANTIAGO DEL ESTERO")) {
+    		oracion = oracion.replaceAll("SANTIAGO DEL ESTERO", "SANTIAGODELESTERO");
+    	} else if (oracion.contains("SAN LUIS")) {
+    		oracion = oracion.replaceAll("SAN LUIS", "SANLUIS");
+    	}
+    	return oracion;
     }
 }
