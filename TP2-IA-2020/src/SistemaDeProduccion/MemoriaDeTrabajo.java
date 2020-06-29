@@ -18,6 +18,7 @@ public class MemoriaDeTrabajo {
         oracion = normalizar(oracion);
         oracion = oracion.replaceAll("a", "");
         System.out.println(oracion);
+        oracion = funcionIneficiente(oracion);
         StringTokenizer tokens = new StringTokenizer(oracion);
         
         while(tokens.hasMoreTokens()){
@@ -206,5 +207,33 @@ public class MemoriaDeTrabajo {
         }
         
         return new String(temporal);
+    }
+    
+    public static String funcionIneficiente(String oracion) {
+    	
+    	oracion = oracion.toUpperCase();
+    	
+    	if(oracion.contains("RIO NEGRO")) {
+    		oracion = oracion.replaceAll("RIO NEGRO", "RIONEGRO");
+    	} else if (oracion.contains("SANTA FE")) {
+    		oracion = oracion.replaceAll("SANTA FE", "SANTAFE");
+    	} else if (oracion.contains("SAN JUAN")) {
+    		oracion = oracion.replaceAll("SAN JUAN", "SANJUAN");
+    	} else if (oracion.contains("LA PAMPA")) {
+    		oracion = oracion.replaceAll("LA PAMPA", "LAPAMPA");
+    	} else if (oracion.contains("ENTRE RIOS")) {
+    		oracion = oracion.replaceAll("ENTRE RIOS", "ENTRERIOS");
+    	} else if (oracion.contains("TIERRA DEL FUEGO")) {
+    		oracion = oracion.replaceAll("TIERRA DEL FUEGO", "TIERRADELFUEGO");
+    	} else if (oracion.contains("LA RIOJA")) {
+    		oracion = oracion.replaceAll("LA RIOJA", "LARIOJA");
+    	} else if (oracion.contains("SANTA CRUZ")) {
+    		oracion = oracion.replaceAll("SANTA CRUZ", "SANTACRUZ");
+    	} else if (oracion.contains("SANTIAGO DEL ESTERO")) {
+    		oracion = oracion.replaceAll("SANTIAGO DEL ESTERO", "SANTIAGODELESTERO");
+    	} else if (oracion.contains("SAN LUIS")) {
+    		oracion = oracion.replaceAll("SAN LUIS", "SANLUIS");
+    	}
+    	return oracion;
     }
 }
