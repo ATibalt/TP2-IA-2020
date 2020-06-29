@@ -168,7 +168,7 @@ public class MemoriaDeProduccion {
     	listaReglas.add(new Regla(Arrays.asList("PREGUNTACANT", "MORTALIDAD", "LUGAR"), "- Hasta ahora la cantidad de muertos por COVID-19 en "+ datosLugar.get(0) +" es " + datosLugar.get(2), 15, 2, 4, 1));
     	listaReglas.add(new Regla(Arrays.asList("PREGUNTACANT", "CONTAGIO", "LUGAR"), "- Hasta ahora la cantidad de contagiados de COVID-19 en "+ datosLugar.get(0) +" es " + datosLugar.get(1), 16, 2, 1, 1));
     	listaReglas.add(new Regla(Arrays.asList("PREGUNTACANT", "RECUPERADO", "LUGAR"), "- Hasta ahora la cantidad de personas recuperadas de COVID-19 en "+ datosLugar.get(0) +" es " + datosLugar.get(3), 17, 2, 3, 1));
-    	listaReglas.add(new Regla(Arrays.asList("PREGUNTACANT", "CUARENTENA", "LUGAR"), "- En "+ datosLugar.get(0) +" "+ datosLugar.get(6) + " existe una cuarentena vigente.", 18, 2, 1, 1));
+    	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "CUARENTENA", "LUGAR"), "- En "+ datosLugar.get(0) +" "+ datosLugar.get(6) + " existe una cuarentena vigente.", 18, 2, 1, 1));
     	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "RIESGO", "LUGAR"), "- En "+ datosLugar.get(0) +" "+ datosLugar.get(6) + " existe riesgo de contagio, si tiene que ir por favor tenga mucho cuidado.", 19, 2, 3, 1));
     	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "RIESGO", "CONTAGIO", "LUGAR"), "- "+ datosLugar.get(0) +" "+ datosLugar.get(6) + " se considera una zona con riesgo de contagio.", 20, 5, 3, 1));
     	listaReglas.add(new Regla(Arrays.asList("PREGUNTA", "CIRCULACION", "LUGAR"), "- En "+ datosLugar.get(0) +" "+ datosLugar.get(6) + " existe circulacion interna del virus. Consulte en la pagina del Ministerio de Salud para ver cuales son las zonas mas riesgosas", 21, 2, 1, 1));
