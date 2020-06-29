@@ -208,8 +208,6 @@ public class MemoriaDeProduccion {
 			String lugarLista = a.get(0).replaceAll("﻿", "");
 			lugarLista = a.get(0).replaceAll(" ", "");
 			
-			System.out.print(a.get(0));
-			
 			if(lugarUsuario.matches(lugarLista)) {
 				return a;
 			}
