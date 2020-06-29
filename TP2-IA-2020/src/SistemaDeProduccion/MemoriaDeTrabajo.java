@@ -6,9 +6,9 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 public class MemoriaDeTrabajo {
-    private static final String conTildes = "Ã?Ã¡Ã‰Ã©Ã?Ã­Ã“Ã³ÃšÃºÃ‘Ã±ÃœÃ¼";
+    private static final String conTildes = "ÁáÉéÍíÓóÚúÑñÜü";
     private static final String sinTildes = "AaEeIiOoUuNnUu";
-    private static final String puntuacion = ",.;:Â¿?Â¡!()'Â´$%&";
+    private static final String puntuacion = ",.;:¿?¡!()'$%&";
 
     public static Set<ArrayList<String>> convertir(String oracion){
     	

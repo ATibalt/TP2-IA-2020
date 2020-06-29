@@ -61,19 +61,17 @@ public class Main extends JFrame {
 		simulator = new KnowledgeBasedAgentSimulator(environment, agent);
 
 		getContentPane().setLayout(null);
+		
+		
 		respuesta.setContentType("text/html");
 		respuesta.setToolTipText("");
-//        respuesta.setLineWrap(true); aca
-//        respuesta.setWrapStyleWord(true); aca
 		respuesta.setForeground(Color.BLACK);
 		respuesta.setBorder(BorderFactory.createCompoundBorder(respuesta.getBorder(),
 				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
 		respuesta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-//        respuesta.setRows(1); aca
 		respuesta.setEditable(false);
 		respuesta.setBounds(25, 25, 350, 250);
-//        respuesta.setColumns(10); aca
 		respuesta.setBackground(Color.WHITE);
 
 		Font font = respuesta.getFont();
@@ -86,22 +84,22 @@ public class Main extends JFrame {
 		getContentPane().add(sp);
 		sp.setViewportView(respuesta);
 
+		// Panel de escritura del mensaje para el agente
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.GRAY));
 		panel.setBounds(10, 494, 326, 69);
-		getContentPane().add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		mensaje.setLineWrap(true);
 		mensaje.setWrapStyleWord(true);
-		panel.add(mensaje);
-
-		// Panel de cargado de mensaje (ingrese aqui la percepcion del agente)
 		mensaje.setText(" Escriba aquí su mensaje");
 		mensaje.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		mensaje.setColumns(10);
 		mensaje.setBorder(BorderFactory.createCompoundBorder(mensaje.getBorder(),
 				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-
+		panel.add(mensaje);
+		getContentPane().add(panel);
+		
+		// Botón para enviar el mensaje
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(null);
 		panel_1.setBounds(346, 494, 69, 69);
@@ -117,7 +115,8 @@ public class Main extends JFrame {
 		panel_2.setBounds(10, 11, 405, 91);
 
 		getContentPane().add(panel_2);
-
+		
+		// Panel del perfil del bot
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(17, 11, 69, 69);
 		lblNewLabel.setIcon(new ImageIcon(Main.class.getResource("/img/img-perfil.png")));
@@ -129,7 +128,11 @@ public class Main extends JFrame {
 		panel_2.add(lblNewLabel);
 		panel_2.add(lblNewLabel_1);
 		panel_2.add(lblNewLabel_2);
-
+		
+		
+		/* Eventos */
+		
+		// Apretar el botón enviar
 		enviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!mensaje.getText().equals(" Escriba aquí su mensaje")) {
@@ -142,7 +145,8 @@ public class Main extends JFrame {
 				}
 			}
 		});
-
+		
+		// Presionar teclas en panel de mensaje
 		mensaje.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -174,7 +178,8 @@ public class Main extends JFrame {
 				}
 			}
 		});
-
+		
+		// Foco en el panel de mensaje
 		mensaje.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent feg) {
@@ -189,7 +194,8 @@ public class Main extends JFrame {
 				}
 			}
 		});
-
+		
+		// Cerrar ventana
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -209,17 +215,21 @@ public class Main extends JFrame {
 
 	public void buscarRespuesta() throws IOException {
 		if (!mensaje.getText().isEmpty()) {
+			
+			// Obtener la hora actual
 			Calendar calendario = Calendar.getInstance();
 			int hora = calendario.get(Calendar.HOUR_OF_DAY);
 			int minutos = calendario.get(Calendar.MINUTE);
 			int segundos = calendario.get(Calendar.SECOND);
+			
 			String time = hora + ":" + minutos + ":" + segundos;
-			String oracionAux = mensaje.getText();
+			
+			// Mensaje para el bot
+			String pregunta = mensaje.getText();
 			environment.getEnvironmentState().setMensaje(mensaje.getText().toUpperCase());
 
-			/////////////// PRIMER PASO ///////////////////////
+			
 			ArrayList<String> resultados = simulator.start();
-			///////////////////////////////////////////////////
 
 			String log = "";
 			// Operacion a realizar por el ChatBot
@@ -230,41 +240,17 @@ public class Main extends JFrame {
 				log = resultados.get(1);
 			}
 
-			auxRespuesta = auxRespuesta + "<p><b>" + time + " - Usuario</b><br>" + oracionAux.replace("\n", "<br>")
+			// Mensaje para el bot
+			auxRespuesta = auxRespuesta + "<p><b>" + time + " - Usuario</b><br>" + pregunta.replace("\n", "<br>")
 					+ "</p>";
-
-//            auxRespuesta = auxRespuesta + "<br>";
-
-//            respuesta.setText(respuesta.getText() + "<p>[ " + time+" - Usuario ]" + oracionAux + "</p><p>asd</p>");
-//            respuesta.setText(respuesta.getText()+"<br><br>");
-
+			// Respuesta
 			auxRespuesta = auxRespuesta + "<p><b style=\"color:blue\">" + time + " - Asistente</b><br>"
 					+ rta.replace("\n", "<br>") + "</p>";
 
 			auxRespuesta = auxRespuesta + "<br><hr>";
 
-//            auxRespuesta = auxRespuesta + "<br>";
-
-			// el if esta para que cuando no existan problemas, no diga "<Accion>"
-//            if(rta.equals("** no privacy violations detected **")){
-//                respuesta.setText(respuesta.getText()+ "<p>[ " +time+" - <b>Asistente</b> ]<br>" + rta + "</p>");
-//            }
-//            else{
-//                respuesta.setText(respuesta.getText()+ "<p>[ " +time+" - <b>Asistente</b> ]<br>" + rta + "</p>");
-//            }
-
 			// Guardar el log en el fichero
 			fichero.write(log);
-
-//            respuesta.setText(respuesta.getText() + "<br>");
-
-			// Separador entre cada interaccion, que es tan largo como el ultimo renglo de
-			// la respuesta
-//            for(int k=0; k <= rta.length(); k++){
-//            for(int k=0; k <= 37; k++){
-//                respuesta.setText(respuesta.getText() + "--");
-//            }
-//            respuesta.setText(respuesta.getText() + "<br>");
 
 			respuesta.setText(auxRespuesta);
 			aux = 0;
